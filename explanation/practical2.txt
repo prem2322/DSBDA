@@ -1,0 +1,287 @@
+import os
+os.getcwd()
+import os: Bringing in the os library to work with the operating system.
+
+os.getcwd(): Get Current Working Directory, meaning it shows where your code is running from.
+
+2.
+python
+Copy
+Edit
+import pandas as pd
+Bringing in Pandas — a library that helps you work with tables (rows and columns).
+
+3.
+python
+Copy
+Edit
+df = pd.read_csv('student.csv')
+Read the file called student.csv (a table) into a variable called df.
+
+4.
+python
+Copy
+Edit
+df
+Show the full table (df).
+
+5.
+python
+Copy
+Edit
+df.shape
+Show the number of rows and columns in the table.
+
+6.
+python
+Copy
+Edit
+df.head()
+Show the first 5 rows of the table.
+
+7.
+python
+Copy
+Edit
+df.tail()
+Show the last 5 rows of the table.
+
+8.
+python
+Copy
+Edit
+df.count()
+Count how many non-missing values are there in each column.
+
+9.
+python
+Copy
+Edit
+df.info()
+Give a summary: column names, data types (number or text), and how many values are filled.
+
+10.
+python
+Copy
+Edit
+df.isnull()
+For each value, show True if it is missing, otherwise False.
+
+11.
+python
+Copy
+Edit
+df.isnull().sum()
+Show how many missing values are there in each column.
+
+12.
+python
+Copy
+Edit
+print(True+True)
+Just for fun: True is treated like 1, so True+True = 2.
+
+13.
+python
+Copy
+Edit
+df.dropna()
+Remove (drop) all rows that have missing values.
+
+14.
+python
+Copy
+Edit
+df.fillna(0)
+Replace all missing values with 0.
+
+15.
+python
+Copy
+Edit
+df['class'].fillna('TE')
+In the class column, fill missing values with 'TE' (some label).
+
+16.
+python
+Copy
+Edit
+df['marks'].fillna(df['marks'].mean())
+In the marks column, fill missing values with the average marks.
+
+17.
+python
+Copy
+Edit
+df['age'].fillna(df['age'].median())
+In the age column, fill missing values with the middle value (median).
+
+18.
+python
+Copy
+Edit
+df['class'].value_counts()
+Count how many times each value appears in the class column.
+
+19.
+python
+Copy
+Edit
+df['class'].fillna(df['class'].mode()[0])
+Fill missing values in the class column with the most common value (mode).
+
+20.
+python
+Copy
+Edit
+df.fillna(method='backfill')
+Fill missing values by copying the next row’s value.
+
+21.
+python
+Copy
+Edit
+df.fillna(method='pad')
+Fill missing values by copying the previous row’s value.
+
+22.
+python
+Copy
+Edit
+df.describe()
+Give basic statistics (mean, min, max, etc.) for numeric columns.
+
+23.
+python
+Copy
+Edit
+import numpy as np
+x = np.array([5,4,3,2,7,8,98,28])
+Bring in NumPy (math library), and create an array x with numbers.
+
+24.
+python
+Copy
+Edit
+np.mean(x)
+Calculate the average of the numbers in x.
+
+25.
+python
+Copy
+Edit
+np.median(x)
+Find the middle value (median) of x.
+
+26.
+python
+Copy
+Edit
+import matplotlib.pyplot as plt
+Bring in matplotlib.pyplot — a library for making graphs.
+
+27.
+python
+Copy
+Edit
+plt.boxplot(x);
+Draw a box plot for x to see data spread and outliers.
+
+28.
+python
+Copy
+Edit
+df.plot.box()
+Make a box plot for all numeric columns in df.
+
+29.
+python
+Copy
+Edit
+df.loc[6,'marks']
+Look at the marks value at row 6.
+
+30.
+python
+Copy
+Edit
+df.loc[6,'marks'] = 98.45
+Update the marks at row 6 to 98.45.
+
+31.
+python
+Copy
+Edit
+df.plot.box()
+Again, plot a boxplot after the change.
+
+32.
+python
+Copy
+Edit
+df.loc[6,'marks']
+Again check the marks at row 6 to confirm the update.
+
+33.
+python
+Copy
+Edit
+df.plot.hist()
+Plot a histogram for all numeric data.
+
+34.
+python
+Copy
+Edit
+df['age'].plot.hist()
+Plot a histogram for just the age column.
+
+35.
+python
+Copy
+Edit
+x = df[['age','marks']]
+Create a new table x with only age and marks columns.
+
+36.
+python
+Copy
+Edit
+x.describe()
+Show statistics for age and marks.
+
+37.
+python
+Copy
+Edit
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+Bring in MinMaxScaler from sklearn.
+
+It scales data between 0 and 1 (smallest to largest).
+
+38.
+python
+Copy
+Edit
+pd.DataFrame(x_scaled).describe()
+Show statistics of the scaled data.
+
+39.
+python
+Copy
+Edit
+from sklearn.preprocessing import StandardScaler
+scaler = StandardScaler()
+x_scaled = scaler.fit_transform(x)
+Bring in StandardScaler.
+
+It normalizes data to have mean = 0 and standard deviation = 1.
+
+40.
+python
+Copy
+Edit
+pd.DataFrame(x_scaled).describe()
+Show statistics of the standardized data.

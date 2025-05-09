@@ -1,0 +1,119 @@
+1. import pandas as pd
+This line loads the pandas library, which helps us work with tables (like Excel).
+
+We use pd as a shortcut name for pandas.
+
+2. df = pd.read_csv('iris.csv')
+This reads a file named iris.csv and loads it into a table (DataFrame) called df.
+
+3. df.shape
+This shows the number of rows and columns in the table.
+
+Example: (150, 5) means 150 rows and 5 columns.
+
+4.
+python
+Copy
+Edit
+#input data
+x = df.drop('species', axis=1)
+#output data
+y = df['species']
+x is the input — we remove the 'species' column because it's the result we want to predict.
+
+y is the output — it contains only the 'species' column (the flower type).
+
+5. y.value_counts()
+This counts how many samples there are for each flower type (species).
+
+6.
+python
+Copy
+Edit
+#cross validation
+from sklearn.model_selection import train_test_split
+This imports a function to split our data into training and testing parts.
+
+7.
+python
+Copy
+Edit
+x_train, x_test, y_train, y_test = train_test_split(x, y, random_state=0, test_size=0.25)
+We split the data:
+
+x_train, y_train: used to train the model (75%)
+
+x_test, y_test: used to test it (25%)
+
+random_state=0 makes sure we get the same split every time.
+
+8. x_train.shape
+Shows the size of the training input data.
+
+9. x_test.shape
+Shows the size of the test input data.
+
+10. from sklearn.naive_bayes import GaussianNB
+We import a machine learning model called Naive Bayes.
+
+11. clf = GaussianNB()
+We create the model and call it clf.
+
+12. clf.fit(x_train, y_train)
+This trains the model using the training data.
+
+13. y_pred = clf.predict(x_test)
+This uses the model to predict the species for the test data.
+
+14.
+python
+Copy
+Edit
+from sklearn.metrics import confusion_matrix
+from sklearn.metrics import classification_report
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import ConfusionMatrixDisplay
+These lines import tools to measure accuracy and show results like:
+
+How many predictions were correct
+
+Confusion matrix
+
+Precision, recall, etc.
+
+15. con_mat = confusion_matrix(y_test, y_pred)
+Creates the confusion matrix using the real and predicted values.
+
+16. ConfusionMatrixDisplay(confusion_matrix=con_mat).plot()
+This shows the confusion matrix as a visual chart.
+
+17. accuracy_score(y_test, y_pred)
+Tells us the percentage of correct predictions.
+
+18. clf.predict_proba(x_test)
+Shows the probabilities for each possible class (species) predicted.
+
+19.
+python
+Copy
+Edit
+newl = [[4.5, 2.9, 3.1, 0.4]]
+clf.predict(newl)[0]
+Predicts the species for a new flower with given measurements.
+
+20.
+python
+Copy
+Edit
+newl = [[5.5, 3.1, 1.0, 0.8]]
+clf.predict(newl)[0]
+Another prediction for a different flower.
+
+21. print(classification_report(y_test, y_pred))
+Prints a detailed report with:
+
+Precision: how many predicted correctly
+
+Recall: how many actual cases were found
+
+F1-score: balance between precision and recall

@@ -1,0 +1,272 @@
+.
+python
+Copy
+Edit
+import pandas as pd
+Import Pandas — it helps work with tables (rows and columns).
+
+2.
+python
+Copy
+Edit
+df = pd.read_csv('Social_Network_Ads.csv')
+Read the CSV file (Social_Network_Ads.csv) into a table called df.
+
+3.
+python
+Copy
+Edit
+df
+Show the data inside df.
+
+4.
+python
+Copy
+Edit
+# input data
+x = df[['Age', 'EstimatedSalary']]
+# output data
+y = df['Purchased']
+x = the input features (Age and EstimatedSalary).
+
+y = the output (Purchased: 0 means No, 1 means Yes).
+
+5.
+python
+Copy
+Edit
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+Import MinMaxScaler — it scales Age and Salary between 0 and 1.
+
+x_scaled is the new scaled input.
+
+6.
+python
+Copy
+Edit
+from sklearn.model_selection import train_test_split
+Import a function to split the data into training and testing parts.
+
+7.
+python
+Copy
+Edit
+x_train, x_test, y_train, y_test = train_test_split(x_scaled, y, test_size=0.25, random_state=0)
+Split data:
+
+75% for training (x_train, y_train)
+
+25% for testing (x_test, y_test)
+
+random_state=0 means the split is fixed (reproducible).
+
+8.
+python
+Copy
+Edit
+x_train
+Show the training input data.
+
+9.
+python
+Copy
+Edit
+y_train
+Show the training output labels.
+
+10.
+python
+Copy
+Edit
+from sklearn.linear_model import LogisticRegression
+Import Logistic Regression — a simple ML algorithm for classification (0 or 1).
+
+11.
+python
+Copy
+Edit
+import seaborn as sns
+sns.countplot(x=y)
+Import seaborn for graphs.
+
+Plot how many people purchased (1) vs. did not purchase (0).
+
+12.
+python
+Copy
+Edit
+y.value_counts()
+Count how many 0’s and 1’s are there in the output.
+
+13.
+python
+Copy
+Edit
+classifier = LogisticRegression()
+Create a Logistic Regression model.
+
+14.
+python
+Copy
+Edit
+classifier.fit(x_train, y_train)
+Train the model on the training data.
+
+15.
+python
+Copy
+Edit
+y_pred = classifier.predict(x_test)
+Predict output values for the test input x_test.
+
+16.
+python
+Copy
+Edit
+y_train.shape
+Show the shape (rows, columns) of training output.
+
+17.
+python
+Copy
+Edit
+x_train.shape
+Show the shape of training input.
+
+18.
+python
+Copy
+Edit
+y_pred
+Show the predicted outputs for the test set.
+
+19.
+python
+Copy
+Edit
+y_test
+Show the actual outputs for the test set.
+
+20.
+python
+Copy
+Edit
+import matplotlib.pyplot as plt
+Import matplotlib.pyplot — used for drawing graphs.
+
+21.
+python
+Copy
+Edit
+plt.xlabel('Age')
+plt.ylabel('Salary')
+plt.scatter(x['Age'], x['EstimatedSalary'], c=y)
+Scatter plot of Age vs Salary.
+
+Color the points based on whether they purchased (y = 0 or 1).
+
+22.
+python
+Copy
+Edit
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler()
+x_scaled = scaler.fit_transform(x)
+Again scaling (repeating it here, maybe not needed).
+
+23.
+python
+Copy
+Edit
+pd.DataFrame(x_scaled).describe()
+Show statistics (mean, min, max) for the scaled inputs.
+
+24.
+python
+Copy
+Edit
+plt.xlabel('Age')
+plt.ylabel('Salary')
+plt.scatter(x_scaled[:,0], x_scaled[:,1], c=y)
+Scatter plot of the scaled Age and Salary.
+
+25.
+python
+Copy
+Edit
+from sklearn.metrics import confusion_matrix
+Import confusion matrix — to check how many predictions were correct and wrong.
+
+26.
+python
+Copy
+Edit
+confusion_matrix(y_test, y_pred)
+Create a confusion matrix between actual (y_test) and predicted (y_pred) outputs.
+
+27.
+python
+Copy
+Edit
+y_test.value_counts()
+Count how many 0’s and 1’s were actually present in the test set.
+
+28.
+python
+Copy
+Edit
+from sklearn.metrics import ConfusionMatrixDisplay
+Import ConfusionMatrixDisplay — helps draw the confusion matrix.
+
+29.
+python
+Copy
+Edit
+ConfusionMatrixDisplay.from_estimator(classifier, x_test, y_test)
+Draw the confusion matrix neatly using the trained model.
+
+30.
+python
+Copy
+Edit
+from sklearn.metrics import accuracy_score
+accuracy_score(y_test, y_pred)
+Calculate accuracy: how many predictions were correct.
+
+31.
+python
+Copy
+Edit
+from sklearn.metrics import classification_report
+Import classification_report — gives detailed performance (precision, recall, f1-score).
+
+32.
+python
+Copy
+Edit
+print(classification_report(y_test, y_pred))
+Print full report showing:
+
+Precision
+
+Recall
+
+F1-score
+
+Support
+
+✅ Summary of this notebook:
+
+Read customer data (Age and Salary).
+
+Scale the data (make it 0-1 range).
+
+Train a Logistic Regression model.
+
+Predict if someone buys or not.
+
+Evaluate the performance with accuracy, confusion matrix, and report.
+
+Plot graphs to visualize data.

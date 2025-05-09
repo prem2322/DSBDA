@@ -1,0 +1,299 @@
+Here is a simple, line-by-line explanation of the code in practical7.ipynb. This notebook is focused on Natural Language Processing (NLP) using the NLTK library and also uses TF-IDF for converting text into numbers.
+
+1. Download necessary NLTK resources
+python
+Copy
+Edit
+import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
+nltk.download('wordnet')
+nltk.download('averaged_perceptron_tagger')
+These lines download tools needed for text processing:
+
+stopwords: common words like "is", "the"
+
+punkt: tokenizer for splitting text into words/sentences
+
+wordnet: for lemmatization (getting root forms of words)
+
+averaged_perceptron_tagger: helps in part-of-speech tagging
+
+2. Define a paragraph
+python
+Copy
+Edit
+import nltk
+para = "The Ellora Caves, located near Aurangabad in Maharashtra, India, are a UNESCO World Heritage Site..."
+Defines a paragraph of text about Ellora Caves.
+
+3. Print the paragraph
+python
+Copy
+Edit
+print(para)
+Simply shows the paragraph.
+
+4. Split paragraph into words
+python
+Copy
+Edit
+para.split()
+Breaks the paragraph into words using spaces.
+
+5. Import tokenizers
+python
+Copy
+Edit
+from nltk.tokenize import sent_tokenize
+from nltk.tokenize import word_tokenize
+Imports functions to split text into sentences and words.
+
+6. Mistake line (downloading non-existent resource)
+python
+Copy
+Edit
+import nltk
+nltk.download('punkt_tab')  # ❌ This resource does not exist
+Note: 'punkt_tab' is likely a typo or unnecessary.
+
+7. Tokenize into sentences and access second one
+python
+Copy
+Edit
+sent = sent_tokenize(para)
+sent[1]
+Splits paragraph into sentences, then shows the second sentence.
+
+8. Tokenize into words
+python
+Copy
+Edit
+words = word_tokenize(para)
+Breaks paragraph into individual words and punctuation marks.
+
+9. Show word tokens
+python
+Copy
+Edit
+words
+Displays the list of words.
+
+10. Import stopwords
+python
+Copy
+Edit
+from nltk.corpus import stopwords
+Prepares to use common words that are often removed from text.
+
+11. Get English stopwords
+python
+Copy
+Edit
+swords = stopwords.words('english')
+Loads a list of English stopwords.
+
+12. Show stopwords
+python
+Copy
+Edit
+swords
+Displays the stopwords.
+
+13. Remove stopwords from the word list
+python
+Copy
+Edit
+x = [word for word in words if word not in swords]
+Keeps only the important words (removes "is", "the", "are", etc.).
+
+14. Show filtered words
+python
+Copy
+Edit
+x
+Displays the words after removing stopwords.
+
+15. Import stemming tool
+python
+Copy
+Edit
+from nltk.stem import PorterStemmer
+Imports tool to reduce words to their stem (e.g., "working" → "work").
+
+16. Create stemmer object
+python
+Copy
+Edit
+ps = PorterStemmer()
+Creates an instance of the stemmer.
+
+17. Example of stemming
+python
+Copy
+Edit
+ps.stem('working')
+Stems the word "working" → "work"
+
+18. Stem all filtered words
+python
+Copy
+Edit
+y = [ps.stem(word) for word in x]
+Applies stemming to each word in the list.
+
+19. Show stemmed words
+python
+Copy
+Edit
+y
+Displays all stemmed words.
+
+20. Import lemmatizer
+python
+Copy
+Edit
+from nltk.stem import WordNetLemmatizer
+Prepares to use a more advanced root-finding tool (lemmatizer).
+
+21. Create lemmatizer object
+python
+Copy
+Edit
+wnl = WordNetLemmatizer()
+Creates an instance of the lemmatizer.
+
+22. Lemmatize "working" as a verb
+python
+Copy
+Edit
+print(wnl.lemmatize('working', pos='v'))
+Reduces "working" to "work" using verb rules.
+
+23. Download extra WordNet data
+python
+Copy
+Edit
+nltk.download('omw-1.4')
+Needed for lemmatization to work properly.
+
+24. Another lemmatize example
+python
+Copy
+Edit
+wnl.lemmatize('working', pos='v')
+Same as earlier: gets root word "work".
+
+25. Compare stemmer vs lemmatizer on "went"
+python
+Copy
+Edit
+print(ps.stem('went'))       # Output: "went"
+print(wnl.lemmatize('went', pos='v'))  # Output: "go"
+Shows stemmer keeps "went" as-is, but lemmatizer corrects it to "go".
+
+26. Lemmatize all words
+python
+Copy
+Edit
+z = [wnl.lemmatize(word, pos='v') for word in x]
+Converts all filtered words to their root verb form.
+
+27. Show lemmatized words
+python
+Copy
+Edit
+z
+Displays the lemmatized words.
+
+28. Import string module
+python
+Copy
+Edit
+import string
+Used to access punctuation characters.
+
+29. Show all punctuation
+python
+Copy
+Edit
+string.punctuation
+Displays characters like . , ! ? ; : etc.
+
+30. Remove punctuation from lemmatized list
+python
+Copy
+Edit
+t = [word for word in z if word not in string.punctuation]
+Removes punctuation marks from the word list.
+
+31. Show cleaned list
+python
+Copy
+Edit
+t
+Final list of clean, important words.
+
+32. Import POS tagger
+python
+Copy
+Edit
+from nltk import pos_tag
+Prepares to tag words with their parts of speech (noun, verb, etc.)
+
+33. Download tagger
+python
+Copy
+Edit
+nltk.download('averaged_perceptron_tagger_eng')
+Downloads a specific English POS tagger (redundant with earlier tagger).
+
+34. Tag each word in list
+python
+Copy
+Edit
+tagged = pos_tag(t)
+Tags each word with its part of speech.
+
+35. Show tagged words
+python
+Copy
+Edit
+tagged
+Shows words along with their tags like ('India', 'NNP').
+
+36. Import TF-IDF converter
+python
+Copy
+Edit
+from sklearn.feature_extraction.text import TfidfVectorizer
+TF-IDF turns words into numbers based on importance in the text.
+
+37. Create TF-IDF object
+python
+Copy
+Edit
+vectorize = TfidfVectorizer()
+Creates a TF-IDF converter.
+
+38. Transform cleaned words into TF-IDF numbers
+python
+Copy
+Edit
+v = vectorize.fit_transform(t)
+v
+Converts list of words into a TF-IDF matrix.
+
+39. Import pandas
+python
+Copy
+Edit
+import pandas as pd
+Loads the pandas library to work with tables (DataFrames).
+
+40. Show TF-IDF table
+python
+Copy
+Edit
+pd.DataFrame(v)
+Displays the TF-IDF values in table form (not very readable with single words).

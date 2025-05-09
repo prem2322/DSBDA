@@ -1,0 +1,189 @@
+1.
+python
+Copy
+Edit
+import pandas as pd
+Bring in the Pandas library (helps work with tables and data).
+
+2.
+python
+Copy
+Edit
+df = pd.read_csv('student2.csv')
+Read the file called student2.csv into a table called df.
+
+3.
+python
+Copy
+Edit
+df
+Show the entire table (df) so you can see the data.
+
+4.
+python
+Copy
+Edit
+df.mean()
+Calculate the average value (mean) for each numeric column (like Age, Marks).
+
+5.
+(Empty cell, nothing to explain here)
+
+6.
+python
+Copy
+Edit
+df.std()
+Find the standard deviation for each column — tells how spread out the numbers are.
+
+7.
+python
+Copy
+Edit
+df.min()
+Find the smallest value in each column.
+
+8.
+python
+Copy
+Edit
+df.max()
+Find the largest value in each column.
+
+9.
+python
+Copy
+Edit
+import numpy as np
+Bring in NumPy, a library for math calculations.
+
+10.
+python
+Copy
+Edit
+np.std(df['Age'])
+Find the standard deviation of just the Age column using NumPy.
+
+11.
+python
+Copy
+Edit
+gr1 = df.groupby('Gender')
+Group the data by the Gender column.
+
+Now you can treat boys and girls separately.
+
+12.
+python
+Copy
+Edit
+gr1.groups
+Show which rows belong to each gender group.
+
+13.
+python
+Copy
+Edit
+tw = gr1.get_group(0)
+Get the group where Gender is 0 (maybe boys or girls, depending on your data).
+
+14.
+python
+Copy
+Edit
+tw
+Show the data of the group you just selected (where Gender = 0).
+
+15.
+python
+Copy
+Edit
+import seaborn as sns
+Bring in Seaborn, a library for beautiful graphs and datasets.
+
+16.
+python
+Copy
+Edit
+df1 = sns.load_dataset('iris')
+Load a built-in dataset called iris (famous flower dataset) into df1.
+
+17.
+python
+Copy
+Edit
+df1
+Show the iris dataset.
+
+18.
+python
+Copy
+Edit
+df1.describe()
+Show basic statistics (mean, std, min, max) for the iris dataset.
+
+19.
+python
+Copy
+Edit
+gr = df1.groupby('species')
+Group the iris data based on the species (setosa, versicolor, virginica).
+
+20.
+python
+Copy
+Edit
+se = gr.get_group('setosa')
+ve = gr.get_group('versicolor')
+vi = gr.get_group('virginica')
+Pick out each flower type separately:
+
+se → Setosa flowers
+
+ve → Versicolor flowers
+
+vi → Virginica flowers
+
+21.
+python
+Copy
+Edit
+se.shape
+Show how many rows and columns there are for setosa.
+
+22.
+python
+Copy
+Edit
+ve.shape
+Show how many rows and columns there are for versicolor.
+
+23.
+python
+Copy
+Edit
+vi.shape
+Show how many rows and columns there are for virginica.
+
+24.
+python
+Copy
+Edit
+se.describe()
+Show statistics for the setosa flowers.
+
+25.
+python
+Copy
+Edit
+ve.describe()
+Show statistics for the versicolor flowers.
+
+26.
+python
+Copy
+Edit
+vi.describe()
+Show statistics for the virginica flowers.
+
+(last cell is empty, nothing to explain)
